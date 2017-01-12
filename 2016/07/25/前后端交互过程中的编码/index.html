@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>前后端交互过程中的编码 | SFE&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Javascript" />
+    
+    <meta name="description" content="起因最近在写PHP，本身对PHP不太熟练。然后遇到编码这个问题，困扰了大半天，索性，系统探索解决一番。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前后端交互过程中的编码">
+<meta property="og:url" content="https://sfegsq.github.io/2016/07/25/前后端交互过程中的编码/index.html">
+<meta property="og:site_name" content="SFE's blog">
+<meta property="og:description" content="起因最近在写PHP，本身对PHP不太熟练。然后遇到编码这个问题，困扰了大半天，索性，系统探索解决一番。">
+<meta property="og:updated_time" content="2017-01-12T15:13:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前后端交互过程中的编码">
+<meta name="twitter:description" content="起因最近在写PHP，本身对PHP不太熟练。然后遇到编码这个问题，困扰了大半天，索性，系统探索解决一番。">
+    
+
+    
+
+    
+        <link rel="icon" href="https://sfegsq.github.io/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ae51abb0facd0b6dd1e1074fa24940f4";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/project/index.html">项目</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="postcd ..-前后端交互过程中的编码" class="article article-single article-type-postcd .." itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        前后端交互过程中的编码
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/07/25/前后端交互过程中的编码/" class="article-date">
+    <time datetime="2016-07-25T05:04:03.000Z" itemprop="datePublished">2016-07-25</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近在写PHP，本身对PHP不太熟练。然后遇到编码这个问题，困扰了大半天，索性，系统探索解决一番。<br><a id="more"></a></p>
+<h2 id="前后端交互过程中涉及的编码"><a href="#前后端交互过程中涉及的编码" class="headerlink" title="前后端交互过程中涉及的编码"></a>前后端交互过程中涉及的编码</h2><ol>
+<li>Browser cilent: 首先，浏览器的设置里有设置编码格式，一般设置为UTF-8。</li>
+<li>AJAX request: AJAX异步请求的过程中可以设置编码，<code>contentType:&quot;application/x-www-form-urlencoded; charset=utf-8&quot;</code></li>
+<li>PHP cilent: PHP通过<code>$_POST</code>这个全局变量接收前端POST过来的数据，编码格式为AJAX在请求头中设置的<code>charset=utf-8</code>,PHP操作的过程中可以通过<code>iconv</code>函数库自行转码,例如<code>iconv(&quot;UTF-8&quot;,&quot;GB2312//IGNORE&quot;,$data)</code></li>
+<li>connection: 在PHP与数据库连接的过程中可以设置<code>connection</code>过程中使用的编码格式，例如CodeIgniter框架可以在数据库配置文件database.php中，设置<code>&#39;char_set&#39; =&gt; &#39;latin1&#39;</code></li>
+<li>databases: 数据会先把数据从php客户端的编码转为转为<code>connection</code>中设置的编码，再以字节流的形式传输并插入数据库。</li>
+</ol>
+<h2 id="字符编码"><a href="#字符编码" class="headerlink" title="字符编码"></a>字符编码</h2><p>常用的编码分为</p>
+<ul>
+<li>UTF-8 万国码，就是它是一种变长的编码方式</li>
+<li>latin1 又称“西欧语言”，是mysql数据库默认设置。为单字节编码</li>
+<li>gb2312 一共收录了7445个字符，包括6763个汉字和682个其它符号。</li>
+<li>GBK 汉字内码扩展规范,支持繁体与简体和许多符号</li>
+</ul>
+<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>走上国际化就靠它了。现在推荐使用UTF-8，这样外国人打开我们的网站的时候不需要转码，直接就能使用。<br>不多说了，大家都认识。</p>
+<p>看一下他的编码特质<br><strong>UTF-8的设计有以下的多字符组序列的特质</strong></p>
+<ul>
+<li>单字节字符的最高有效比特永远为0。</li>
+<li>多字节序列中的首个字符组的几个最高有效比特决定了序列的长度。最高有效位为110的是2字节序列，而1110的是三字节序列，如此类推。</li>
+<li>多字节序列中其余的字节中的首两个最高有效比特为10。</li>
+</ul>
+<p>UTF-8的这些特质，保证了一个字符的字节序列不会包含在另一个字符的字节序列中。这确保了以字节为基础的部分字符串比对（sub-string match）<br>方法可以适用于在文字中搜索字或词。有些比较旧的可变长度8位编码（如Shift JIS）没有这个特质，故字符串比对的算法变得相当复杂。虽然这增加了UTF-8<br>编码的字符串的信息冗余，但是利多于弊。另外，数据压缩并非Unicode的目的，所以不可混为一谈。即使在发送过程中有部分字节因错误或干扰而完全丢失，<br>还是有可能在下一个字符的起点重新同步，令受损范围受到限制。</p>
+<p>另一方面，由于其字节序列设计，如果一个疑似为字符串的序列被验证为UTF-8编码，那么我们可以有把握地说它是UTF-8字符串。一段两字节随机序列碰巧为合法的UTF-8而非ASCII的概率为32分1。对于三字节序列的概率为256分1，对更长的序列的概率就更低了。</p>
+<h3 id="latin1"><a href="#latin1" class="headerlink" title="latin1"></a>latin1</h3><p><code>latin1</code>编码是单字节编码，向下兼容ASCII，其编码范围是0x00-0xFF，0x00-0x7F之间完全和ASCII一致，0x80-0x9F之间是控制字符，0xA0-0xFF之间是文字符号。</p>
+<p>因为<code>latin1</code>编码范围使用了单字节内的所有空间，在支持<code>latin1</code>的系统中传输和存储其他任何编码的字节流都不会被抛弃。换言之，把其他任何编码的字节流当作<code>latin1</code>编码看待都没有问题。<br>这是个很重要的特性，MySQL数据库默认编码是Latin1就是利用了这个特性，<code>latin1</code>编码是一个8位的容器。</p>
+<p>把一个gbk编码的串写入latin1的表，不会有任何问题，保存的是原封不动的字节流，从表中读取已写入的串也不会有任何问题，且读出的字节流就和当初写入的完全一致。</p>
+<p>读取出来以后，如果在终端下，就会理解成locale类型（如果locale系gbk，当时写入的gbk中文串可正常回显）读取出来以后，如果要写入文件，则文件编码方式即当时写入的字节流编码，如gbk写入的，读出存入文件后，文件编码也是gbk！<br>但是如果混着写（utf-8 + gbk),那编辑器就犯蒙了，就可能会显示会有乱码。</p>
+<p>当然，基于可维护的角度，还是统一为UTF-8编码格式，以免出现乱码。</p>
+<h3 id="GBK与gb2312"><a href="#GBK与gb2312" class="headerlink" title="GBK与gb2312"></a>GBK与gb2312</h3><p>因为历史原因，很多网页和数据库依然使用这个编码格式<br>应该逐步升级为UTF-8。</p>
+<h2 id="文件编码"><a href="#文件编码" class="headerlink" title="文件编码"></a>文件编码</h2><p>每个文件都设置了其编码的格式,大部分推荐使用UTF-8。</p>
+<h3 id="VIM文件编码示例"><a href="#VIM文件编码示例" class="headerlink" title="VIM文件编码示例"></a>VIM文件编码示例</h3><p>一个文本文件，vim打开的时候按某种编码A打开，转换成某种编码B，然后保存的时候转换成另一种编码C，其他文本编辑器类似，可能没有vim这么可以设置和自动完成。<br>编码B：对于整个文件没有影响，只是事关显示的，就是vim与操作系统交互时候使用的编码。</p>
+<p>编码A：使用 set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1设置。vim 按照设置的顺序检查检测文件的编码。因为某些编码里不存在某些二进制序列的组合，所以如果检测到就认为不是这种编码，检查下一种编码，否则就认为是这一种。因为latin-1可以出现任何二进制序列的组合，所以如果放到第一个，那么将永远以latin-1显示。</p>
+<p>在一般的二进制文件里是不存在字符编码的标记的。但是Unicode里面有个特殊叫做零宽度空格（\FE\FF）而\FF\FE是不存在的编码，所以在Unicode的标准里可以人为的在开始加入这个字符（这个字符在任何字体下都是没有宽度的，在中文字符里面没有任何的效果跟没有一样，是为了照顾东南亚某些语言的显示而设置的）。这样就便于文本编辑器检查字符和字节顺序，但是在代码里include这种文件经常会出问题（这可是个大坑，编译器会认为这是一个非法字符，可是你又看不到）。</p>
+<p>编码B：set fileencoding=utf-8，保存时候使用的编码，保存的时候自动转换为另一种编码。但是如果一开始打开的时候就识别错了编码，再转换的时候一个不存在的字符也是不会完转换的。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://blog.chinaunix.net/uid-24098129-id-312645.html" target="_blank" rel="external">mysql的latin1 支持中文 </a></li>
+<li><a href="https://zh.wikipedia.org/wiki/UTF-8" target="_blank" rel="external">UTF-8维基百科</a></li>
+<li><a href="https://segmentfault.com/a/1190000000506269" target="_blank" rel="external">VIM 文件编码识别与乱码处理</a></li>
+</ol>
+
+        </div>
+        <footer class="article-footer">
+            
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2016/07/25/前后端交互过程中的编码/" data-title="前后端交互过程中的编码" data-url="https://sfegsq.github.io/2016/07/25/前后端交互过程中的编码/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/SFEGSQ" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="http://weibo.com/smallsfe/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1926213114&site=qq&menu=yes" target="_blank">
+                        <i class="icon fa fa-qq"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="envelope" href="mailto:sfegsq@qq.com" target="_blank">
+                        <i class="icon fa fa-envelope"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/08/15/漫话密码存储/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            漫话密码存储
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/07/18/阅读gulp源码小结/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">阅读gulp源码小结</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">团队简介</h3>
+        <div class="widget">
+            
+            SEF是Small Front End的缩写。
+            <br>
+            Small表示我们一群新人的面貌。
+            <br>
+            我们是一群想搞事情的前端新人。
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/09/测试/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/logo.png)" alt="测试" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/01/09/测试/" class="title">测试</a></p>
+                            <p class="item-date"><time datetime="2017-01-09T10:36:49.000Z" itemprop="datePublished">2017-01-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/b4ea9b45dcb8721d25093648344b18e9.jpeg)" alt="聊聊这一年从技术麻瓜开始的奋斗史" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/过往历程/">过往历程</a></p>
+                            <p class="item-title"><a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="title">聊聊这一年从技术麻瓜开始的奋斗史</a></p>
+                            <p class="item-date"><time datetime="2016-12-14T01:03:57.000Z" itemprop="datePublished">2016-12-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/13/前端也该了解的一些后端知识/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/性能/">性能</a></p>
+                            <p class="item-title"><a href="/2016/12/13/前端也该了解的一些后端知识/" class="title">前端也该了解的一些后端知识</a></p>
+                            <p class="item-date"><time datetime="2016-12-13T09:32:10.000Z" itemprop="datePublished">2016-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/06/H5数据推送/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/eeb7c52440b693a3f9f80aaf60b61ec7.JPG)" alt="H5数据推送" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/06/H5数据推送/" class="title">H5数据推送</a></p>
+                            <p class="item-date"><time datetime="2016-12-06T07:15:16.000Z" itemprop="datePublished">2016-12-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/04/JavaScript函数式编程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://wilsonliu.cn/cdn/img/201612/5be45dbd2fea86d07c96b392b776101b.JPG)" alt="JavaScript函数式编程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/12/04/JavaScript函数式编程/" class="title">JavaScript函数式编程</a></p>
+                            <p class="item-date"><time datetime="2016-12-04T05:10:35.000Z" itemprop="datePublished">2016-12-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/过往历程/">过往历程</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP权威指南/">HTTP权威指南</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP权威指南/" style="font-size: 16px;">HTTP权威指南</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/安全/" style="font-size: 12px;">安全</a> <a href="/tags/实习/" style="font-size: 10px;">实习</a> <a href="/tags/数据结构/" style="font-size: 18px;">数据结构</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/计算机网络/" style="font-size: 18px;">计算机网络</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://segmentfault.com/u/smallfrontend">segmentfault专栏</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.wilsonliu.cn">WilsonLiu博客</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p style="float:left">&copy; 2017 SFE</p>
+                <p style="float:right">小前端，搞事情</p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'sfe'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

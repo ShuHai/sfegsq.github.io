@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>HTTP内容分发 | SFE&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="HTTP权威指南" />
+    
+    <meta name="description" content="Web主机托管对内容资源的存储协调以及管理的职责统称为Web主机托管。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTTP内容分发">
+<meta property="og:url" content="https://sfegsq.github.io/2016/05/01/HTTP内容分发/index.html">
+<meta property="og:site_name" content="SFE's blog">
+<meta property="og:description" content="Web主机托管对内容资源的存储协调以及管理的职责统称为Web主机托管。">
+<meta property="og:updated_time" content="2017-01-12T15:13:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTTP内容分发">
+<meta name="twitter:description" content="Web主机托管对内容资源的存储协调以及管理的职责统称为Web主机托管。">
+    
+
+    
+
+    
+        <link rel="icon" href="https://sfegsq.github.io/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ae51abb0facd0b6dd1e1074fa24940f4";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/project/index.html">项目</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/网络/">网络</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="postcd ..-HTTP内容分发" class="article article-single article-type-postcd .." itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        HTTP内容分发
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/05/01/HTTP内容分发/" class="article-date">
+    <time datetime="2016-05-01T05:18:52.000Z" itemprop="datePublished">2016-05-01</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP权威指南/">HTTP权威指南</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="Web主机托管"><a href="#Web主机托管" class="headerlink" title="Web主机托管"></a>Web主机托管</h2><p>对内容资源的存储协调以及管理的职责统称为Web主机托管。<br><a id="more"></a></p>
+<h3 id="虚拟服务器请求却反主机信息"><a href="#虚拟服务器请求却反主机信息" class="headerlink" title="虚拟服务器请求却反主机信息"></a>虚拟服务器请求却反主机信息</h3><p>HTTP/1.0中的一个设计缺陷会使虚拟主机托管者疯狂。HTTP/1.0中没有为共享的Web服务器提供任何方法来识别要访问的是所托管的哪个虚拟网站。<br>HTTP/1.0请求在报文中只发送URL的路径部分，如果要访问<code>http://www.baidu.com/index.html</code>，浏览器会连接到服务器<code>http://www.baidu.com</code>,但HTTP/1.0请求中却只提到<code>GET /index.html</code>，没有提到主机名。如果服务器虚拟托管了许多个站点，就没有足够的信息能指出要访问的是哪个虚拟主机网站。 并且HTTP反向代理和拦截代理也都需要明确的站点信息。</p>
+<p>因此HTTP/1.1的确要求服务器能够处理HTTP报文请求行上的完整URL，但将现存的应用程序都升级都这个规范还需要时间，在此期间，涌现出了以下4种技术。</p>
+<ol>
+<li>通过URL路径进行虚拟主机托管 —— 在URL中增添专门的路径部分，以便服务器判断是哪个网站</li>
+<li>通过端口号进行主机托管 —— 为每个站点分配不同的端口号，这样请求就由web服务器的单独实例来处理</li>
+<li>通过IP地址进行主机托管 —— 为不同的虚拟站点分配专门的IP地址</li>
+<li>通过Host首部进行主机托管</li>
+</ol>
+<h3 id="镜像的服务器集群"><a href="#镜像的服务器集群" class="headerlink" title="镜像的服务器集群"></a>镜像的服务器集群</h3><p>服务器集群是一排配置相同的Web服务器，互相可以替换。每个服务器上的内容可以通过镜像复制，这样当某个服务器出问题的时候，其他的可以顶上。<br>镜像的服务器常常组成层次化的关系。某个服务器可能充当“内容权威”——它含有原始内容(可能就是内容作者上传的那个服务器)。这个服务器称为主原始服务器(<code>master origin server</code>)。从主原始服务器接收内容的镜像服务器称为复制原始服务器(<code>replica origin server</code>)。一种简单的部署服务器集群的方法是用网络交换机把请求分发给服务器。托管在服务器上的每个网站的IP地址就设置为交换机的IP地址。</p>
+<p>镜像Web服务器可以在不同的地点包含同样内容的副本。可以有以下两种方法把客户端的请求导向特定的服务器。</p>
+<ol>
+<li>HTTP重定向 —— 该内容的URL会解析到主服务器的IP地址，然后它会发生重定向到复制服务器</li>
+<li>DNS重定向 —— 该内容的URL会解析到4个IP地址，DNS服务器可以选择发送给客户端的IP地址</li>
+</ol>
+<h3 id="内容分发网络-CDN"><a href="#内容分发网络-CDN" class="headerlink" title="内容分发网络 CDN"></a>内容分发网络 CDN</h3><p>简单地说，内容分发网络就是对特定内容进行分发的专门网络。这个网络中的节点可以是Web服务器，反向代理或缓存。</p>
+<h4 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h4><p>反向代理缓存可以像镜像服务器一样接收服务器请求，它们代表原始服务器中的一个特定集合来接收服务器请求。(根据内容所在的IP地址的广告方式，这是有可能的，原始服务器和反向代理缓存之间通常有协作关系，到特定的原始服务器的请求就由反向代理缓存来接收。)</p>
+<h4 id="CDN中的代理缓存"><a href="#CDN中的代理缓存" class="headerlink" title="CDN中的代理缓存"></a>CDN中的代理缓存</h4><p>与反向代理不同，传统的代理缓存能够收到发往任何Web服务器的请求(在代理缓存与原始服务器之间不需要有任何工作关系或IP地址约定)。</p>
+<h2 id="重定向和负载均衡"><a href="#重定向和负载均衡" class="headerlink" title="重定向和负载均衡"></a>重定向和负载均衡</h2><p>由于HTTP应用程序总是要做下列3件事情，所以在现代网络中重定向是普遍存在的:</p>
+<ul>
+<li>可靠地执行HTTP事务</li>
+<li>最小化时延</li>
+<li>节约网络带宽<br>出于这些原因，web内容通常分布在很多地方。这么做是出于可靠性的考虑。这样如果一个位置出现了问题，还有其他的可用；如果客户端能够访问较劲的资源，就可用更快的收到所请求的内容，以降低响应时间；将目标服务器分散，还可以减少网络拥塞。可用将重定向当做一组有助于找到”最佳”分布式内容的技术。<br>而重定向和负载均衡总是共存的。</li>
+</ul>
+<h3 id="重定向方法"><a href="#重定向方法" class="headerlink" title="重定向方法"></a>重定向方法</h3><p><strong>通用的重定向方法</strong></p>
+<ul>
+<li>HTTP重定向</li>
+<li>DNS重定向</li>
+<li>任播寻址</li>
+<li>IP MAC转发</li>
+<li>IP地址转发</li>
+</ul>
+<p><strong>代理与缓存重定向技术</strong></p>
+<ul>
+<li>显示浏览器配置</li>
+<li>代理自动配置(PAC)</li>
+<li>Web Proxy代理自动发现协议(WPAD)</li>
+<li>Web缓存协调协议(WCCP)</li>
+<li>因特网缓存协议(ICP)</li>
+<li>缓存分组路由协议(CARP)</li>
+<li>超文本缓存协议(HTCP)</li>
+</ul>
+<h3 id="通用的重定向方法"><a href="#通用的重定向方法" class="headerlink" title="通用的重定向方法"></a>通用的重定向方法</h3><h4 id="HTTP重定向"><a href="#HTTP重定向" class="headerlink" title="HTTP重定向"></a>HTTP重定向</h4><p>与其他形式的重定向相比，HTTP重定向的优点之一就是重定向服务器知道客户端IP地址，理论上来讲，它可以做出更合理的选择。</p>
+<p>HTTP重定向可以在服务器间引导请求，但有以下几个缺点。</p>
+<ul>
+<li>需要原始服务器进行大量处理来判断要重定向到哪台服务器上去。有时，发布重定向所需的处理量几乎与提高页面本身所需的处理量一样。</li>
+<li>增加了用户时延，因为访问页面时要进行两次往返。</li>
+<li>如果重定向服务器出故障，站点就会瘫痪。</li>
+</ul>
+<h4 id="DNS重定向"><a href="#DNS重定向" class="headerlink" title="DNS重定向"></a>DNS重定向</h4><p>DNS允许将几个IP地址关联到一个域中，可以配置DNS解析程序，或对其进行编程，以返回可变的IP地址。解析程序返回IP地址时，所基于的原则可以很简单(轮转)，也可以很复杂(比如查看几台服务器上的负载均衡，并返回负载最轻的服务器的IP地址)。</p>
+<p><strong>DNS缓存带来的影响</strong></p>
+<p>DNS对服务器的每次查询都会得到不同的服务器地址序列，所以DNS地址轮转会将负载分摊。但是这种负载均衡也并不完美，因为DNS查找结果可能会被客户端记住并被反复重用，以减少DNS查找的开销，而且有些服务器也愿意保持与一台客户端的联系。</p>
+<p><strong>其他基于DNS的重定向算法</strong></p>
+<ul>
+<li>负载均衡算法</li>
+<li>邻接路由算法</li>
+<li>故障屏蔽算法</li>
+</ul>
+<h4 id="任播寻址"><a href="#任播寻址" class="headerlink" title="任播寻址"></a>任播寻址</h4><p>在任播寻址中，几个地理上分散的Web服务器拥有完全相同的IP地址，而且会通过骨干路由器的”最短路径”路由功能将客户端的请求发送给离它最近的服务器。要使这种方法工作，每个路由器都要想邻近的骨干路由器广告，表明自己是一台路由器。</p>
+<h4 id="IP-MAC转发"><a href="#IP-MAC转发" class="headerlink" title="IP MAC转发"></a>IP MAC转发</h4><p>支持MAC转发的第四次交换机通常会将请求转发给几个代理缓存，并在它们之间平衡负载，因为MAC地址转发是点对点的，所以服务器或代理只能位于离交换机一跳远的地方。</p>
+<h4 id="IP地址转发"><a href="#IP地址转发" class="headerlink" title="IP地址转发"></a>IP地址转发</h4><p>在IP地址转发中，交换机或其他第四层设备会检测输入分组中的TCP/IP地址，并通过修改目的IP地址(不是目的MAC地址)，对分组进行相应的转发。</p>
+<h3 id="代理的重定向方法"><a href="#代理的重定向方法" class="headerlink" title="代理的重定向方法"></a>代理的重定向方法</h3><ul>
+<li>显式配置浏览器设置</li>
+<li>代理自动配置 PAC</li>
+<li>Web代理自动发现协议 WPAD</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2016/05/01/HTTP内容分发/" data-title="HTTP内容分发" data-url="https://sfegsq.github.io/2016/05/01/HTTP内容分发/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/SFEGSQ" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="http://weibo.com/smallsfe/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1926213114&site=qq&menu=yes" target="_blank">
+                        <i class="icon fa fa-qq"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="envelope" href="mailto:sfegsq@qq.com" target="_blank">
+                        <i class="icon fa fa-envelope"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/05/20/ShellScript编程小结/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            ShellScript编程小结
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/04/29/HTTP实体和编码/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">HTTP实体和编码</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">团队简介</h3>
+        <div class="widget">
+            
+            SEF是Small Front End的缩写。
+            <br>
+            Small表示我们一群新人的面貌。
+            <br>
+            我们是一群想搞事情的前端新人。
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/09/测试/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/logo.png)" alt="测试" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/01/09/测试/" class="title">测试</a></p>
+                            <p class="item-date"><time datetime="2017-01-09T10:36:49.000Z" itemprop="datePublished">2017-01-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/b4ea9b45dcb8721d25093648344b18e9.jpeg)" alt="聊聊这一年从技术麻瓜开始的奋斗史" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/过往历程/">过往历程</a></p>
+                            <p class="item-title"><a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="title">聊聊这一年从技术麻瓜开始的奋斗史</a></p>
+                            <p class="item-date"><time datetime="2016-12-14T01:03:57.000Z" itemprop="datePublished">2016-12-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/13/前端也该了解的一些后端知识/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/性能/">性能</a></p>
+                            <p class="item-title"><a href="/2016/12/13/前端也该了解的一些后端知识/" class="title">前端也该了解的一些后端知识</a></p>
+                            <p class="item-date"><time datetime="2016-12-13T09:32:10.000Z" itemprop="datePublished">2016-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/06/H5数据推送/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/eeb7c52440b693a3f9f80aaf60b61ec7.JPG)" alt="H5数据推送" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/06/H5数据推送/" class="title">H5数据推送</a></p>
+                            <p class="item-date"><time datetime="2016-12-06T07:15:16.000Z" itemprop="datePublished">2016-12-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/04/JavaScript函数式编程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://wilsonliu.cn/cdn/img/201612/5be45dbd2fea86d07c96b392b776101b.JPG)" alt="JavaScript函数式编程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/12/04/JavaScript函数式编程/" class="title">JavaScript函数式编程</a></p>
+                            <p class="item-date"><time datetime="2016-12-04T05:10:35.000Z" itemprop="datePublished">2016-12-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/过往历程/">过往历程</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP权威指南/">HTTP权威指南</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP权威指南/" style="font-size: 16px;">HTTP权威指南</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/安全/" style="font-size: 12px;">安全</a> <a href="/tags/实习/" style="font-size: 10px;">实习</a> <a href="/tags/数据结构/" style="font-size: 18px;">数据结构</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/计算机网络/" style="font-size: 18px;">计算机网络</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://segmentfault.com/u/smallfrontend">segmentfault专栏</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.wilsonliu.cn">WilsonLiu博客</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p style="float:left">&copy; 2017 SFE</p>
+                <p style="float:right">小前端，搞事情</p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'sfe'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

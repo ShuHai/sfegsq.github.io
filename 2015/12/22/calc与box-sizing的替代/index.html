@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>calc 与 box-sizing 的替代 | SFE&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Javascript" />
+    
+    <meta name="description" content="背景之前发现calc这个布局新属性之后就非常喜欢，爱不释手。在公司的实习的时候，开发微信端的页面，使用了几次calc，后来发现在Android的上的不支持～蛋疼。于是到处找替代方案，终于在stackoverflow上找到一个满意的答复，好～接下来进入正文～
+calc 与 box-sizing 简单介绍calc 属性calc()能让你给元素的做计算，你可以给一个div元素，使用百分比、em、px和r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="calc 与 box-sizing 的替代">
+<meta property="og:url" content="https://sfegsq.github.io/2015/12/22/calc与box-sizing的替代/index.html">
+<meta property="og:site_name" content="SFE's blog">
+<meta property="og:description" content="背景之前发现calc这个布局新属性之后就非常喜欢，爱不释手。在公司的实习的时候，开发微信端的页面，使用了几次calc，后来发现在Android的上的不支持～蛋疼。于是到处找替代方案，终于在stackoverflow上找到一个满意的答复，好～接下来进入正文～
+calc 与 box-sizing 简单介绍calc 属性calc()能让你给元素的做计算，你可以给一个div元素，使用百分比、em、px和r">
+<meta property="og:image" content="https://sfault-image.b0.upaiyun.com/819/632/819632304-5679632b2a6b4">
+<meta property="og:updated_time" content="2017-01-12T15:13:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="calc 与 box-sizing 的替代">
+<meta name="twitter:description" content="背景之前发现calc这个布局新属性之后就非常喜欢，爱不释手。在公司的实习的时候，开发微信端的页面，使用了几次calc，后来发现在Android的上的不支持～蛋疼。于是到处找替代方案，终于在stackoverflow上找到一个满意的答复，好～接下来进入正文～
+calc 与 box-sizing 简单介绍calc 属性calc()能让你给元素的做计算，你可以给一个div元素，使用百分比、em、px和r">
+<meta name="twitter:image" content="https://sfault-image.b0.upaiyun.com/819/632/819632304-5679632b2a6b4">
+    
+
+    
+
+    
+        <link rel="icon" href="https://sfegsq.github.io/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ae51abb0facd0b6dd1e1074fa24940f4";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/project/index.html">项目</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-calc与box-sizing的替代" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        calc 与 box-sizing 的替代
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2015/12/22/calc与box-sizing的替代/" class="article-date">
+    <time datetime="2015-12-21T16:00:00.000Z" itemprop="datePublished">2015-12-22</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>之前发现calc这个布局新属性之后就非常喜欢，爱不释手。在公司的实习的时候，开发微信端的页面，使用了几次calc，后来发现在Android的上的不支持～蛋疼。于是到处找替代方案，终于在stackoverflow上找到一个满意的答复，好～接下来进入正文～</p>
+<h2 id="calc-与-box-sizing-简单介绍"><a href="#calc-与-box-sizing-简单介绍" class="headerlink" title="calc 与 box-sizing 简单介绍"></a>calc 与 box-sizing 简单介绍</h2><h3 id="calc-属性"><a href="#calc-属性" class="headerlink" title="calc 属性"></a>calc 属性</h3><p><code>calc()</code>能让你给元素的做计算，你可以给一个div元素，使用百分比、em、px和rem单位值计算出其宽度或者高度，比如说“width:calc(50% + 2em)”，这样一来你就不用考虑元素DIV的宽度值到底是多少，而把这个烦人的任务交由浏览器去计算。<br><a id="more"></a><br><code>calc()</code>的运算规则：</p>
+<ul>
+<li>使用“+”、“-”、“*” 和 “/”四则运算;</li>
+<li>可以使用百分比、px、em、rem等单位；</li>
+<li>可以混合使用各种单位进行计算；</li>
+<li>表达式中有“+”和“-”时，其前后必须要有空格，如”width: calc(12%+5em)”这种没有空格的写法是错误的；</li>
+<li>表达式中有“*”和“/”时，其前后可以没有空格，但建议留有空格。</li>
+</ul>
+<p><strong>兼容性</strong></p>
+<p>浏览器对calc()的兼容性还算不错，在IE9+、FF4.0+、Chrome19+、Safari6+都得到较好支持，同样需要在其前面加上各浏览器厂商的识别符，不过可惜的是，移动端的浏览器还没仅有“firefox for android 14.0”支持，其他的全军覆没。</p>
+<p><img src="https://sfault-image.b0.upaiyun.com/819/632/819632304-5679632b2a6b4" alt="caniuse"></p>
+<h3 id="box-sizing"><a href="#box-sizing" class="headerlink" title="box-sizing"></a>box-sizing</h3><p><strong>语法</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">box-sizing ： content-box || border-box || inherit</div></pre></td></tr></table></figure></p>
+<p><strong>取值说明</strong></p>
+<ul>
+<li><p><code>border-box</code>：元素的宽度/高度（width/height）等于元素边框宽度（border）加上元素内边距（padding）加上元素内容宽度/高度（content width/height）即：Element Width/Height = border+padding+content width/height。</p>
+</li>
+<li><p><code>content-box</code>：元素的宽度/高度等于元素内容的宽度/高度。<br><strong>兼容性</strong></p>
+</li>
+</ul>
+<p><img src="https://sfault-image.b0.upaiyun.com/192/633/1926332970-5679633e27564" alt="caniuse"></p>
+<h2 id="布局比较"><a href="#布局比较" class="headerlink" title="布局比较"></a>布局比较</h2><p>相比于box-sizing而言 calc的Android browser的支持性太差了，所以布局的时候，box-sizing可以用来解决calc的问题</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sideBar"</span>&gt;</span>sideBar<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span>content<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">  </div><div class="line">.content &#123; //  使用calc</div><div class="line">  width: 65%；  //照顾Android 平稳退化</div><div class="line">  width: calc(100% - 300px);</div><div class="line">&#125;</div><div class="line"></div><div class="line">//使用box-sizing</div><div class="line">.sideBar &#123;</div><div class="line">  position: absolute; </div><div class="line">  top:0;</div><div class="line">  left:0;</div><div class="line">  width: 300px;</div><div class="line">&#125;</div><div class="line">.content &#123;</div><div class="line">  padding-left: 300px;</div><div class="line">  width: 100%;</div><div class="line">  -moz-box-sizing: border-box;</div><div class="line">  box-sizing: border-box;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>以上的代码来自于stackoverflow，非常棒的解决方案～</p>
+<h2 id="bootstrap中的box-sizing"><a href="#bootstrap中的box-sizing" class="headerlink" title="bootstrap中的box-sizing"></a>bootstrap中的box-sizing</h2><p>之后在工作中，发现bootstrap的源码有这么一段代码～box-sizing这个货还是非常有用的呀～</p>
+<pre><code><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">* &#123;</div><div class="line">  <span class="attribute">-webkit-box-sizing</span>: border-box;</div><div class="line">    <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">          <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div><div class="line">*<span class="selector-pseudo">:before</span>,</div><div class="line">*<span class="selector-pseudo">:after</span> &#123;</div><div class="line">  <span class="attribute">-webkit-box-sizing</span>: border-box;</div><div class="line">    <span class="attribute">-moz-box-sizing</span>: border-box;</div><div class="line">          <span class="attribute">box-sizing</span>: border-box;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</code></pre><h2 id="最后记"><a href="#最后记" class="headerlink" title="最后记"></a>最后记</h2><p>第一篇通过解决自己遇到的问题而来的文章～</p>
+<p>参考资料：</p>
+<ul>
+<li><a href="http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html" target="_blank" rel="external">CSS3的calc()使用</a>  </li>
+<li><a href="http://www.w3cplus.com/content/css3-box-sizing" target="_blank" rel="external">CSS3  Box-sizing</a></li>
+<li><a href="http://stackoverflow.com/questions/16034397/css-calc-alternative" target="_blank" rel="external">Stackoverflow的问答</a></li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2015/12/22/calc与box-sizing的替代/" data-title="calc 与 box-sizing 的替代" data-url="https://sfegsq.github.io/2015/12/22/calc与box-sizing的替代/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/SFEGSQ" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="http://weibo.com/smallsfe/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1926213114&site=qq&menu=yes" target="_blank">
+                        <i class="icon fa fa-qq"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="envelope" href="mailto:sfegsq@qq.com" target="_blank">
+                        <i class="icon fa fa-envelope"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/01/16/正则表达小结与小知识点集锦/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            正则表达小结与小知识点集锦
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">团队简介</h3>
+        <div class="widget">
+            
+            SEF是Small Front End的缩写。
+            <br>
+            Small表示我们一群新人的面貌。
+            <br>
+            我们是一群想搞事情的前端新人。
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/09/测试/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/logo.png)" alt="测试" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/01/09/测试/" class="title">测试</a></p>
+                            <p class="item-date"><time datetime="2017-01-09T10:36:49.000Z" itemprop="datePublished">2017-01-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/b4ea9b45dcb8721d25093648344b18e9.jpeg)" alt="聊聊这一年从技术麻瓜开始的奋斗史" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/过往历程/">过往历程</a></p>
+                            <p class="item-title"><a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="title">聊聊这一年从技术麻瓜开始的奋斗史</a></p>
+                            <p class="item-date"><time datetime="2016-12-14T01:03:57.000Z" itemprop="datePublished">2016-12-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/13/前端也该了解的一些后端知识/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/性能/">性能</a></p>
+                            <p class="item-title"><a href="/2016/12/13/前端也该了解的一些后端知识/" class="title">前端也该了解的一些后端知识</a></p>
+                            <p class="item-date"><time datetime="2016-12-13T09:32:10.000Z" itemprop="datePublished">2016-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/06/H5数据推送/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/eeb7c52440b693a3f9f80aaf60b61ec7.JPG)" alt="H5数据推送" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/06/H5数据推送/" class="title">H5数据推送</a></p>
+                            <p class="item-date"><time datetime="2016-12-06T07:15:16.000Z" itemprop="datePublished">2016-12-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/04/JavaScript函数式编程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://wilsonliu.cn/cdn/img/201612/5be45dbd2fea86d07c96b392b776101b.JPG)" alt="JavaScript函数式编程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/12/04/JavaScript函数式编程/" class="title">JavaScript函数式编程</a></p>
+                            <p class="item-date"><time datetime="2016-12-04T05:10:35.000Z" itemprop="datePublished">2016-12-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/过往历程/">过往历程</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP权威指南/">HTTP权威指南</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP权威指南/" style="font-size: 16px;">HTTP权威指南</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/安全/" style="font-size: 12px;">安全</a> <a href="/tags/实习/" style="font-size: 10px;">实习</a> <a href="/tags/数据结构/" style="font-size: 18px;">数据结构</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/计算机网络/" style="font-size: 18px;">计算机网络</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://segmentfault.com/u/smallfrontend">segmentfault专栏</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.wilsonliu.cn">WilsonLiu博客</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p style="float:left">&copy; 2017 SFE</p>
+                <p style="float:right">小前端，搞事情</p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'sfe'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

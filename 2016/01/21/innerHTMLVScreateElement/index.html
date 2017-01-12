@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <title>innerHTMLVScreateElement | SFE&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+        <meta name="keywords" content="Javascript" />
+    
+    <meta name="description" content="两者生成dom的方式有什么优劣呢？首先让我们看一个小问题再引入正题～">
+<meta property="og:type" content="article">
+<meta property="og:title" content="innerHTMLVScreateElement">
+<meta property="og:url" content="https://sfegsq.github.io/2016/01/21/innerHTMLVScreateElement/index.html">
+<meta property="og:site_name" content="SFE's blog">
+<meta property="og:description" content="两者生成dom的方式有什么优劣呢？首先让我们看一个小问题再引入正题～">
+<meta property="og:updated_time" content="2017-01-12T15:13:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="innerHTMLVScreateElement">
+<meta name="twitter:description" content="两者生成dom的方式有什么优劣呢？首先让我们看一个小问题再引入正题～">
+    
+
+    
+
+    
+        <link rel="icon" href="https://sfegsq.github.io/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/titillium-web/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?ae51abb0facd0b6dd1e1074fa24940f4";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+
+</head>
+
+<body>
+    <div id="wrap">
+        <header id="header">
+    <div id="header-outer" class="outer">
+        <div class="container">
+            <div class="container-inner">
+                <div id="header-title">
+                    <h1 class="logo-wrap">
+                        <a href="/" class="logo"></a>
+                    </h1>
+                    
+                </div>
+                <div id="header-inner" class="nav-container">
+                    <a id="main-nav-toggle" class="nav-icon fa fa-bars"></a>
+                    <div class="nav-container-inner">
+                        <ul id="main-nav">
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/">主页</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/archives">归档</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/about/index.html">关于</a>
+                                </li>
+                            
+                                <li class="main-nav-list-item" >
+                                    <a class="main-nav-list-link" href="/project/index.html">项目</a>
+                                </li>
+                            
+                        </ul>
+                        <nav id="sub-nav">
+                            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="container">
+            <div class="main-body container-inner">
+                <div class="main-body-inner">
+                    <section id="main">
+                        <div class="main-body-header">
+    <h1 class="header">
+    
+    <a class="page-title-link" href="/categories/前端/">前端</a>
+    </h1>
+</div>
+                        <div class="main-body-content">
+                            <article id="post-innerHTMLVScreateElement" class="article article-single article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+        innerHTMLVScreateElement
+        </h1>
+    
+
+            </header>
+        
+        
+            <div class="article-subtitle">
+                <a href="/2016/01/21/innerHTMLVScreateElement/" class="article-date">
+    <time datetime="2016-01-21T04:49:25.000Z" itemprop="datePublished">2016-01-21</time>
+</a>
+                
+    <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li></ul>
+
+            </div>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+            <p>两者生成dom的方式有什么优劣呢？<br>首先让我们看一个小问题再引入正题～<br><a id="more"></a></p>
+<h2 id="如何重复插入一个相同的html结构呢？"><a href="#如何重复插入一个相同的html结构呢？" class="headerlink" title="如何重复插入一个相同的html结构呢？"></a>如何重复插入一个相同的html结构呢？</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//错误的</span></div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">el.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">'Hi'</span>));</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">10</span>; i &gt; <span class="number">0</span>; --i)</div><div class="line"><span class="built_in">document</span>.body.appendChild(el);</div><div class="line">&#125;;  <span class="comment">//同一元素无法重复插入，</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//正确的　　同时注意不要设置插入多次的元素的id,否则造成错误</span></div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">el.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">'Hi'</span>));</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">10</span>; i &gt; <span class="number">0</span>; --i)</div><div class="line"><span class="built_in">document</span>.body.appendChild(el.cloneNode(<span class="literal">true</span>));</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p><strong>上述之所以要用clone，是因为当时我的需求是克隆一个复杂的html结构，而并非生成一个简单的dom元素。</strong></p>
+<h2 id="重排与重绘"><a href="#重排与重绘" class="headerlink" title="重排与重绘"></a>重排与重绘</h2><p>上述方法，虽然能够成功生成相同的dom元素，但是性能上是存在问题的。<br>每次插入dom元素到body后，dom树会重排，之后页面会因为新的dom元素的插入而重新绘制，这两个过程是极其耗时的。<br>因此，推荐使用文档碎片document.createDocumentFragment()。</p>
+<p>使用方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//利用文档碎片 提高性能  frag相当于一个容器 frag并不会插入body而是把frag的内部元素全部插入body</span></div><div class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"><span class="keyword">var</span> frag = <span class="built_in">document</span>.createDocumentFragment();</div><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">el.appendChild(<span class="built_in">document</span>.createTextNode(<span class="string">'Hi'</span>));</div><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">10</span>; i &gt; <span class="number">0</span>; --i)</div><div class="line">frag.appendChild(el.cloneNode(<span class="literal">true</span>));  <span class="comment">//先将生成的dom全部插入frag先，这个过程并不会触发重排与重绘</span></div><div class="line">&#125;;</div><div class="line"><span class="built_in">document</span>.body.appendChild(frag); <span class="comment">//将生成的frag插入body中，将10此重排重绘的过程压缩为一次</span></div></pre></td></tr></table></figure>
+<p>接下来，进入正题的比较</p>
+<h2 id="innerHTML-vs-createElement"><a href="#innerHTML-vs-createElement" class="headerlink" title="innerHTML vs createElement"></a>innerHTML vs createElement</h2><p>生成Dom的两种方式，孰优孰劣呢？<br>就我们的经验看来，innerHTML这种采用字符串拼接生成dom的方式似乎更加方便，并且效率更高。但是那原生的createElement又有什么优势呢？<br>以下，优势观点来自于stack overflow的言论，翻译的也不一点准确，欢迎探讨。</p>
+<ol>
+<li>createElement，当元素插入后仍然保留对dom元素的指针。而innerHTML插入后，并没有对dom元素的指针，你需要再通过getElementById重新选取。</li>
+<li>createElement能够获得事件处理函数，而innerHTML生成的新dom无法获得原先设置的事件处理函数。</li>
+<li>某些情况下，createElement更加快速。如果你需要反复操作字符串，在每次处理后再次插入。每次插入都将进行解析与制作dom，在性能上会很差。</li>
+<li>可读性与可维护上createElement会优秀一些</li>
+</ol>
+<p>下面提供一段封装好了的让你方便的使用createElement的函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">a</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(a) === <span class="string">"[object Array]"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">make</span>(<span class="params">desc</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (!isArray(desc)) &#123;</div><div class="line">        <span class="keyword">return</span> make.call(<span class="keyword">this</span>, <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> name = desc[<span class="number">0</span>];</div><div class="line">    <span class="keyword">var</span> attributes = desc[<span class="number">1</span>];</div><div class="line"></div><div class="line">    <span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(name);</div><div class="line"></div><div class="line">    <span class="keyword">var</span> start = <span class="number">1</span>;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> attributes === <span class="string">"object"</span> &amp;&amp; attributes !== <span class="literal">null</span> &amp;&amp; !isArray(attributes)) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> attr <span class="keyword">in</span> attributes) &#123;</div><div class="line">            el[attr] = attributes[attr];</div><div class="line">        &#125;</div><div class="line">        start = <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = start; i &lt; desc.length; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (isArray(desc[i])) &#123;</div><div class="line">            el.appendChild(make(desc[i]));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            el.appendChild(<span class="built_in">document</span>.createTextNode(desc[i]));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> el;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>使用方式</p>
+<p><code>make([&quot;p&quot;, &quot;Here is a &quot;, [&quot;a&quot;, { href:&quot;http://www.google.com/&quot; }, &quot;link&quot;], &quot;.&quot;]);</code></p>
+<p>你会得到这样一个html结构</p>
+<p><code>&lt;p&gt;Here is a &lt;a href=&quot;http://www.google.com/&quot;&gt;link&lt;/a&gt;.&lt;/p&gt;</code></p>
+<p>综上，两者各有各的好处。无疑，在大多数情况下，innerHTML更为快速且更加易用，但是使用innerHTML的时候小心上述的那个问题就好。</p>
+<ul>
+<li><p><a href="http://stackoverflow.com/questions/2946656/advantages-of-createelement-over-innerhtml" target="_blank" rel="external">Advantages of createElement over innerHTML? </a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/2946656/advantages-of-createelement-over-innerhtml" target="_blank" rel="external">Advantages of createElement over innerHTML?</a></p>
+</li>
+<li><p><a href="http://stackoverflow.com/questions/737307/javascript-is-it-better-to-use-innerhtml-or-lots-of-createelement-calls-to-ad" target="_blank" rel="external">JavaScript: Is it better to use innerHTML or (lots of) createElement calls to add a complex div structure?</a></p>
+</li>
+</ul>
+
+        </div>
+        <footer class="article-footer">
+            
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+
+        </footer>
+    </div>
+</article>
+
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2016/01/21/innerHTMLVScreateElement/" data-title="innerHTMLVScreateElement" data-url="https://sfegsq.github.io/2016/01/21/innerHTMLVScreateElement/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+
+                        </div>
+                    </section>
+                    <aside id="sidebar">
+    <a class="sidebar-toggle" title="Expand Sidebar"><i class="toggle icon"></i></a>
+    <div class="sidebar-top">
+        <p>关注我 :</p>
+        <ul class="social-links">
+            
+                
+                <li>
+                    <a class="social-tooltip" title="github" href="https://github.com/SFEGSQ" target="_blank">
+                        <i class="icon fa fa-github"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="weibo" href="http://weibo.com/smallsfe/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1" target="_blank">
+                        <i class="icon fa fa-weibo"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="qq" href="http://wpa.qq.com/msgrd?v=3&uin=1926213114&site=qq&menu=yes" target="_blank">
+                        <i class="icon fa fa-qq"></i>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a class="social-tooltip" title="envelope" href="mailto:sfegsq@qq.com" target="_blank">
+                        <i class="icon fa fa-envelope"></i>
+                    </a>
+                </li>
+                
+            
+        </ul>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2016/01/23/webpack替代fekit的折腾小记/" id="article-nav-newer" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">下一篇</strong>
+        <p class="article-nav-title">
+        
+            webpack替代fekit的折腾小记
+        
+        </p>
+        <i class="icon fa fa-chevron-right" id="icon-chevron-right"></i>
+    </a>
+    
+    
+        <a href="/2016/01/16/正则表达小结与小知识点集锦/" id="article-nav-older" class="article-nav-link-wrap">
+        <strong class="article-nav-caption">上一篇</strong>
+        <p class="article-nav-title">正则表达小结与小知识点集锦</p>
+        <i class="icon fa fa-chevron-left" id="icon-chevron-left"></i>
+        </a>
+    
+</nav>
+
+    
+    <div class="widgets-container">
+        
+            
+                    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">团队简介</h3>
+        <div class="widget">
+            
+            SEF是Small Front End的缩写。
+            <br>
+            Small表示我们一群新人的面貌。
+            <br>
+            我们是一群想搞事情的前端新人。
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/01/09/测试/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/logo.png)" alt="测试" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2017/01/09/测试/" class="title">测试</a></p>
+                            <p class="item-date"><time datetime="2017-01-09T10:36:49.000Z" itemprop="datePublished">2017-01-09</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/b4ea9b45dcb8721d25093648344b18e9.jpeg)" alt="聊聊这一年从技术麻瓜开始的奋斗史" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/过往历程/">过往历程</a></p>
+                            <p class="item-title"><a href="/2016/12/14/聊聊这一年从技术麻瓜开始的奋斗史/" class="title">聊聊这一年从技术麻瓜开始的奋斗史</a></p>
+                            <p class="item-date"><time datetime="2016-12-14T01:03:57.000Z" itemprop="datePublished">2016-12-14</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/13/前端也该了解的一些后端知识/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/性能/">性能</a></p>
+                            <p class="item-title"><a href="/2016/12/13/前端也该了解的一些后端知识/" class="title">前端也该了解的一些后端知识</a></p>
+                            <p class="item-date"><time datetime="2016-12-13T09:32:10.000Z" itemprop="datePublished">2016-12-13</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/06/H5数据推送/" class="thumbnail">
+    
+    
+        <span style="background-image:url(//wilsonliu.cn/cdn/img/201612/eeb7c52440b693a3f9f80aaf60b61ec7.JPG)" alt="H5数据推送" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/前端/">前端</a></p>
+                            <p class="item-title"><a href="/2016/12/06/H5数据推送/" class="title">H5数据推送</a></p>
+                            <p class="item-date"><time datetime="2016-12-06T07:15:16.000Z" itemprop="datePublished">2016-12-06</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/12/04/JavaScript函数式编程/" class="thumbnail">
+    
+    
+        <span style="background-image:url(http://wilsonliu.cn/cdn/img/201612/5be45dbd2fea86d07c96b392b776101b.JPG)" alt="JavaScript函数式编程" class="thumbnail-image"></span>
+    
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/12/04/JavaScript函数式编程/" class="title">JavaScript函数式编程</a></p>
+                            <p class="item-date"><time datetime="2016-12-04T05:10:35.000Z" itemprop="datePublished">2016-12-04</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/安全/">安全</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/性能/">性能</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据结构/">数据结构</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/网络/">网络</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/过往历程/">过往历程</a><span class="category-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">十二月 2016</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">六月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP权威指南/">HTTP权威指南</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a><span class="tag-list-count">18</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/实习/">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据结构/">数据结构</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/测试/">测试</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/计算机网络/">计算机网络</a><span class="tag-list-count">6</span></li></ul>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-float">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/HTTP权威指南/" style="font-size: 16px;">HTTP权威指南</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/PHP/" style="font-size: 14px;">PHP</a> <a href="/tags/前端/" style="font-size: 10px;">前端</a> <a href="/tags/安全/" style="font-size: 12px;">安全</a> <a href="/tags/实习/" style="font-size: 10px;">实习</a> <a href="/tags/数据结构/" style="font-size: 18px;">数据结构</a> <a href="/tags/测试/" style="font-size: 10px;">测试</a> <a href="/tags/计算机网络/" style="font-size: 18px;">计算机网络</a>
+        </div>
+    </div>
+
+
+            
+                
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="https://segmentfault.com/u/smallfrontend">segmentfault专栏</a>
+                    </li>
+                
+                    <li>
+                        <a href="http://blog.wilsonliu.cn">WilsonLiu博客</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+            
+        
+    </div>
+</aside>
+                </div>
+            </div>
+        </div>
+        <footer id="footer">
+    <div class="container">
+        <div class="container-inner">
+            <a id="back-to-top" href="javascript:;"><i class="icon fa fa-angle-up"></i></a>
+            <div class="credit">
+                <h1 class="logo-wrap">
+                    <a href="/" class="logo"></a>
+                </h1>
+                <p style="float:left">&copy; 2017 SFE</p>
+                <p style="float:right">小前端，搞事情</p>
+            </div>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'sfe'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+
+    
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
